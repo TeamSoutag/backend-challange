@@ -1,24 +1,77 @@
-# README
+# 🛠 Desafio Técnico – Desenvolvedor(a) Fullstack Ruby on Rails (Soutag)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 🎯 Objetivo  
+Avaliar sua capacidade de implementar regras de negócio, organizar código de forma escalável e construir uma API realista com boas práticas usando **Rails API**.
 
-Things you may want to cover:
+---
 
-* Ruby version
+## 💡 Contexto
 
-* System dependencies
+Na Soutag, motoristas abastecem em postos parceiros usando a carteira digital e recebem descontos por litro abastecido. Seu desafio será simular esse fluxo.
 
-* Configuration
+---
 
-* Database creation
+## 💻 Desafio
 
-* Database initialization
+Implemente uma API com as seguintes entidades e regras:
 
-* How to run the test suite
+### 📦 Modelos
 
-* Services (job queues, cache servers, search engines, etc.)
+- **Usuário**
+  - nome, email, saldo (float)
 
-* Deployment instructions
+- **Posto de Combustível**
+  - nome, endereço, preço por litro (float), produto (ex: gasolina, etanol, diesel)
 
-* ...
+- **Abastecimento (Refueling)**
+  - usuário, posto, quantidade em litros, preço total, desconto aplicado
+
+### 📜 Regras de Negócio
+
+- O valor total do abastecimento é `litros * preço por litro`
+- O sistema aplica um **desconto fixo de 5%**
+- Além disso, aplicar **um desconto adicional por tipo de produto**, conforme:
+  - **Gasolina**: 2%
+  - **Etanol**: 1%
+  - **Diesel**: 0%
+- O valor final (com todos os descontos) deve ser debitado do saldo do usuário
+- O abastecimento deve ser registrado
+- Não permitir abastecimentos com saldo insuficiente
+
+---
+
+## 🔌 Endpoints esperados
+
+- `POST /refuelings` – realiza um abastecimento
+- `GET /users/:id` – exibe dados do usuário e histórico de abastecimentos
+- `GET /gasstations` – lista os postos, produtos e preços
+
+---
+
+## 🛡️ Requisitos Técnicos
+
+- **Rails API**
+- Banco de dados: SQLite (em memória) ou PostgreSQL
+- Organização de código usando **services** para regras de negócio
+- Testes cobrindo o fluxo principal
+- README com:
+  - Instruções de setup local
+  - Suas decisões técnicas e de modelagem
+
+---
+
+## 🚀 Como entregar
+
+1. Faça um fork ou clone deste repositório
+2. Crie sua solução em uma branch separada
+3. Abra um **Pull Request** com sua entrega
+4. Avise quando estiver pronto para avaliação
+
+---
+
+## ⏰ Prazo sugerido
+
+**1 dia.**  
+Se precisar de mais tempo, sem problema — nos avise.
+
+---
