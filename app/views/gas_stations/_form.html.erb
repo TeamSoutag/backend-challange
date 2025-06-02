@@ -1,0 +1,66 @@
+<%= form_with(model: @gas_station, local: true) do |form| %>
+  <% if @gas_station.errors.any? %>
+    <div class="alert alert-danger">
+      <h4>The following errors were found:</h4>
+      <ul>
+        <% @gas_station.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, 'Name' %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <h4 class="mt-4">Address</h4>
+  <%= form.fields_for :address do |address_form| %>
+    <div class="form-group">
+      <%= address_form.label :acronym, 'Type' %>
+      <%= address_form.select :acronym,
+        options_for_select(
+          AddressAcronym.to_a,
+          address_form.object.acronym.to_s
+        ),
+        { include_blank: 'Select Acronym...' },
+        class: 'form-control'
+      %>
+    </div>
+    <div class="form-group">
+      <%= address_form.label :street, 'Street' %>
+      <%= address_form.text_field :street, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= address_form.label :street_details, 'Street Details' %>
+      <%= address_form.text_field :street_details, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= address_form.label :number, 'Number' %>
+      <%= address_form.text_field :number, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= address_form.label :city, 'City' %>
+      <%= address_form.text_field :city, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= address_form.label :state, 'State' %>
+      <%= address_form.text_field :state, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= address_form.label :zip_code, 'Zip Code' %>
+      <%= address_form.text_field :zip_code, class: 'form-control' %>
+    </div>
+  <% end %>
+
+  <div class="form-group mt-4">
+    <%= form.submit class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', @gas_station.persisted? ? gas_station_path(@gas_station) : gas_stations_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %>
