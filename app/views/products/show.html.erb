@@ -1,0 +1,26 @@
+<div class="container">
+  <h1 class="my-4">Product Details</h1>
+
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">Name: <%= @product.name %></h3>
+      <p class="card-text">
+        <strong>Discount:</strong> <%= number_to_percentage(Discounts.discount_for(Discounts.key_for(@product.discount.to_i)) * 100, precision: 2) %>
+
+      <h3 class="card-title">Gas Station Products</h3>
+      <ul>
+        <% @gas_station_products.each do |gsp| %>
+          <li>
+            <%= gsp.gas_station.name %> - <%= number_to_currency(gsp.price_per_liter) %>
+          </li>
+        <% end %>
+      </ul>
+      </p>
+
+      <div class="mt-4">
+        <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-warning' %>
+        <%= link_to 'Back', products_path, class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  </div>
+</div>
