@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Gas Stations</h1>
+    <%= link_to 'New Gas Station', new_gas_station_path, class: 'btn btn-outline-primary' %>
+  </div>
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>City/State</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @gas_stations.each do |gas_station| %>
+        <tr>
+          <td><%= gas_station.name %></td>
+          <td>
+            <%= "#{gas_station.address.acronym_humanize} #{gas_station.address.street}, #{gas_station.address.number}" %>
+            <% if gas_station.address.street_details.present? %>
+              <br><small><%= gas_station.address.street_details %></small>
+            <% end %>
+          </td>
+          <td><%= "#{gas_station.address.city}/#{gas_station.address.state}" %></td>
+          <td>
+            <%= link_to 'Show', gas_station, class: 'btn btn-info btn-sm' %>
+            <%= link_to 'Edit', edit_gas_station_path(gas_station), class: 'btn btn-warning btn-sm' %>
+            <%= link_to 'Destroy', gas_station, method: :delete,
+                          data: { confirm: 'Are you sure?' },
+                          class: 'btn btn-danger btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @gas_stations %>
+  </div>
+</div>

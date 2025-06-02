@@ -1,0 +1,43 @@
+<%= form_with(model: @refueling || Refueling.new, local: true) do |form| %>
+  <% if form.object.errors.any? %>
+    <div class="alert alert-danger">
+      <h4>The following errors were found:</h4>
+      <ul>
+        <% form.object.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="form-group mb-3">
+    <%= form.label :user_id, "User", class: "form-label" %>
+    <%= form.collection_select :user_id, User.all, :id, :name,
+                              { prompt: "Select a User" },
+                              { class: 'form-select' } %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= form.label :gas_station_id, "Gas Station", class: "form-label" %>
+    <%= form.collection_select :gas_station_id, GasStation.all, :id, :name,
+                              { prompt: "Select a Gas Station" },
+                              { class: 'form-select' } %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= form.label :product_id, "Product", class: "form-label" %>
+    <%= form.collection_select :product_id, Product.all, :id, :name,
+                              { prompt: "Select a Product" },
+                              { class: 'form-select' } %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= form.label :liters, "Quantity (Liters)", class: "form-label" %>
+    <%= form.number_field :liters, step: 0.01, required: true, class: 'form-control' %>
+  </div>
+
+  <div class="form-group mt-4">
+    <%= form.submit "Refuel", class: "btn btn-primary" %>
+    <%= link_to "Cancel", refuelings_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

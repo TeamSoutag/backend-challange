@@ -1,0 +1,35 @@
+<%= form_with(model: @user, local: true) do |form| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <h4>The following errors were found:</h4>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :email %>
+    <%= form.email_field :email, class: 'form-control' %>
+  </div>
+
+  <h4 class="mt-4">Wallet</h4>
+  <%= form.fields_for :wallet do |wallet_form| %>
+    <div class="form-group">
+      <%= wallet_form.label :balance, 'Balance' %>
+      <%= wallet_form.number_field :balance, step: 0.01, class: 'form-control' %>
+    </div>
+  <% end %>
+
+  <div class="form-group mt-4">
+    <%= form.submit class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', @user.persisted? ? user_path(@user) : users_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %>

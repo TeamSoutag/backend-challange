@@ -1,0 +1,26 @@
+<div class="container">
+  <h1 class="my-4">Gas Station Details</h1>
+
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title"><%= @gas_station.name %></h3>
+
+      <h5 class="mt-4">Address</h5>
+      <p class="card-text">
+        <strong>Type:</strong> <%= @gas_station.address.acronym_humanize %><br>
+        <strong>Street:</strong> <%= @gas_station.address.street %>, <%= @gas_station.address.number %><br>
+        <% if @gas_station.address.street_details.present? %>
+          <strong>Street Details:</strong> <%= @gas_station.address.street_details %><br>
+        <% end %>
+        <strong>City:</strong> <%= @gas_station.address.city %><br>
+        <strong>State:</strong> <%= @gas_station.address.state %><br>
+        <strong>Zip Code:</strong> <%= @gas_station.address.zip_code %>
+      </p>
+
+      <div class="mt-4">
+        <%= link_to 'Edit', edit_gas_station_path(@gas_station), class: 'btn btn-warning' %>
+        <%= link_to 'Back', gas_stations_path, class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  </div>
+</div>

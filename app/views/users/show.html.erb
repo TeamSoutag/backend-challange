@@ -1,0 +1,55 @@
+<div class="container">
+  <h1 class="my-4"><%= @user.name %></h1>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">User Details</h5>
+            <strong>Name:</strong> <%= @user.name %><br>
+            <strong>Email:</strong> <%= @user.email %><br>
+            <strong>Wallet Balance:</strong> <%= number_to_currency(@user.wallet.balance) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Refueling History</h5>
+
+          <% if @refuelings.any? %>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Gas Station</th>
+                    <th>Liters</th>
+                    <th>Total Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @refuelings.each do |refueling| %>
+                    <tr>
+                      <td><%= l(refueling.created_at, format: :short) %></td>
+                      <td><%= refueling.gas_station.name %></td>
+                      <td><%= number_with_precision(refueling.liters, precision: 2) %> L</td>
+                      <td><%= number_to_currency(refueling.total_price) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <p class="text-muted">No refueling found.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-warning' %>
+      <%= link_to 'Back', users_path, class: 'btn btn-secondary' %>
+    </div>
+  </div>
+</div>
