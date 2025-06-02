@@ -1,0 +1,22 @@
+<div class="container">
+  <h1 class="my-4">Refueling Details</h1>
+
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">ID: <%= @refueling.id %></h3>
+      <p class="card-text">
+        <strong>User:</strong> <%= @refueling.user.name %><br>
+        <strong>Gas Station:</strong> <%= @refueling.gas_station.name %><br>
+        <strong>Quantity (liters):</strong> <%= number_with_precision(@refueling.liters, precision: 2) %><br>
+        <strong>Total Price:</strong> <%= number_to_currency(@refueling.total_price) %><br>
+        <strong>Discount Applied</strong> <%= number_to_currency(@refueling.discount_applied) %><br>
+        <strong>Date</strong> <%= l(@refueling.created_at) %>
+      </p>
+
+      <div class="mt-4">
+        <%= link_to 'Edit', edit_refueling_path(@refueling), class: 'btn btn-warning' %>
+        <%= link_to 'Back', refuelings_path, class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  </div>
+</div>
