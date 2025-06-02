@@ -1,0 +1,25 @@
+pt-BR:
+  number:
+    currency:
+      format:
+        unit: "R$"
+        separator: ","
+        delimiter: "."
+        precision: 2
+        format: "%u %n"
+
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d/%m"
+      long: "%d de %B de %Y"
+
+  datetime:
+    formats:
+      default: "%d/%m/%Y %H:%M"
